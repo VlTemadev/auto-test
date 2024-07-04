@@ -1,0 +1,51 @@
+plugins {
+    id 'base'
+    id 'java-library'
+    id "io.qameta.allure" version "2.11.2"
+}
+
+repositories {
+    mavenCentral()
+}
+
+allure {
+    version.set("2.25.0")
+
+    adapter {
+        aspectjWeaver.set(true)
+    }
+
+}
+
+
+dependencies {
+    testImplementation(
+            'com.codeborne:selenide:7.3.3',
+            'org.aeonbits.owner:owner:1.0.12',
+            'com.codeborne:selenide-selenoid:7.3.3',
+            'io.qameta.allure:allure-junit5:2.25.0',
+            'io.qameta.allure:allure-selenide:2.23.0',
+            'io.qameta.allure:allure-junit-platform:2.25.0',
+            'io.qameta.allure:allure-assertj:2.25.0',
+            'io.qameta.allure:allure-java-commons:2.25.0',
+            'org.junit.jupiter:junit-jupiter:5.9.2',
+            'org.slf4j:slf4j-simple:2.0.6'
+    )
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.register('simpleTest', Test) {
+    useJUnitPlatform {
+        includeTags 'simple'
+    }
+}
+
+tasks.register('basicTest', Test) {
+    useJUnitPlatform {
+        includeTags 'basic'
+    }
+}
+
